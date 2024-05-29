@@ -1,0 +1,3 @@
+export const VALID_ENUM_VALUE = {
+  COST_STATUS: ["PENDING", "PAID", "CONFIRMED"],
+};
