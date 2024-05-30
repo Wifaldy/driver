@@ -6,6 +6,8 @@ dotenv.config({
   override: true,
 });
 
+export const APP_HOST = process.env.APP_HOST || "0.0.0.0";
+export const APP_PORT = process.env.APP_PORT || 3000;
 export const DB_CONFIG = {
   db_host: process.env["DB_HOST"] || "localhost",
   db_name: process.env["DB_NAME"] || "db_local",

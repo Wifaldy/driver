@@ -4,9 +4,12 @@ import {
   InferAttributes,
   InferCreationAttributes,
   Model,
+  NonAttribute,
 } from "sequelize";
 import { sequelize } from "../sequelize";
 import { TConstStatus, VALID_ENUM_VALUE } from "@/const";
+import { Driver } from "./Driver";
+import { Shipment } from "./Shipment";
 
 interface ShipmentCostAttributes {
   id?: number;
@@ -14,6 +17,7 @@ interface ShipmentCostAttributes {
   shipmentNo: string;
   totalCosts: number;
   costStatus: TConstStatus;
+  shipment?: Shipment;
 }
 
 export class ShipmentCost
@@ -28,6 +32,7 @@ export class ShipmentCost
   declare shipmentNo: string;
   declare totalCosts: number;
   declare costStatus: TConstStatus;
+  declare shipment?: NonAttribute<Shipment>;
 }
 
 ShipmentCost.init(
@@ -39,9 +44,15 @@ ShipmentCost.init(
     },
     driverCode: {
       type: DataTypes.STRING,
+      references: {
+        model: Driver,
+      },
     },
     shipmentNo: {
       type: DataTypes.STRING,
+      references: {
+        model: Shipment,
+      },
     },
     totalCosts: {
       type: DataTypes.INTEGER,
@@ -56,5 +67,6 @@ ShipmentCost.init(
     tableName: "shipment_costs",
     modelName: "shipmentCost",
     underscored: true,
+    timestamps: false,
   }
 );

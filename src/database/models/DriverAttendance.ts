@@ -6,11 +6,12 @@ import {
   Model,
 } from "sequelize";
 import { sequelize } from "../sequelize";
+import { Driver } from "./Driver";
 
 interface DriverAttendanceAttributes {
   id?: number;
   driverCode: string;
-  attendanceDate: string;
+  attendanceDate: Date;
   attendanceStatus: boolean;
 }
 
@@ -23,7 +24,7 @@ export class DriverAttendance
 {
   declare id: CreationOptional<number>;
   declare driverCode: string;
-  declare attendanceDate: string;
+  declare attendanceDate: Date;
   declare attendanceStatus: boolean;
 }
 
@@ -36,9 +37,12 @@ DriverAttendance.init(
     },
     driverCode: {
       type: DataTypes.STRING,
+      references: {
+        model: Driver,
+      },
     },
     attendanceDate: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATEONLY,
     },
     attendanceStatus: {
       type: DataTypes.BOOLEAN,
@@ -49,5 +53,6 @@ DriverAttendance.init(
     tableName: "driver_attendances",
     modelName: "driverAttendance",
     underscored: true,
+    timestamps: false,
   }
 );

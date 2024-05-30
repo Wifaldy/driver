@@ -8,8 +8,8 @@ import { sequelize } from "../sequelize";
 
 interface ShipmentAttributes {
   shipmentNo: string;
-  shipmentDate: string;
-  shipmentStatus: boolean;
+  shipmentDate: Date;
+  shipmentStatus: string;
 }
 
 export class Shipment
@@ -17,17 +17,19 @@ export class Shipment
   implements ShipmentAttributes
 {
   declare shipmentNo: string;
-  declare shipmentDate: string;
-  declare shipmentStatus: boolean;
+  declare shipmentDate: Date;
+  declare shipmentStatus: string;
 }
 
 Shipment.init(
   {
     shipmentNo: {
       type: DataTypes.STRING,
+      primaryKey: true,
+      unique: true,
     },
     shipmentDate: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATEONLY,
     },
     shipmentStatus: {
       type: DataTypes.STRING,
@@ -38,5 +40,6 @@ Shipment.init(
     tableName: "shipments",
     modelName: "shipment",
     underscored: true,
+    timestamps: false,
   }
 );

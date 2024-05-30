@@ -26,6 +26,7 @@ VariableConfig.init(
   {
     key: {
       type: DataTypes.STRING,
+      primaryKey: true,
     },
     value: {
       type: DataTypes.STRING,
@@ -36,5 +37,6 @@ VariableConfig.init(
     tableName: "variable_configs",
     modelName: "variableConfig",
     underscored: true,
+    timestamps: false,
   }
 );
